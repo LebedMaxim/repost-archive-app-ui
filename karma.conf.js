@@ -1,17 +1,36 @@
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine'],
-    files: [],
-    exclude: [],
-    preprocessors: {},
-    reporters: ['progress'],
-    port: 9870,
+    frameworks: ['jasmine', '@angular-devkit/build-angular'],
+    plugins: [
+      require('karma-jasmine'),
+      require('karma-chrome-launcher'),
+      require('karma-jasmine-html-reporter'),
+      require('karma-coverage'),
+      require('@angular-devkit/build-angular/plugins/karma')
+    ],
+    client: {
+      jasmine: {},
+      clearContext: false
+    },
+    jasmineHtmlReporter: {
+      suppressAll: true
+    },
+    coverageReporter: {
+      dir: require('path').join(__dirname, './coverage/angular-unit-testing'),
+      subdir: '.',
+      reporters: [
+        {type: 'html'},
+        {type: 'text-summary'}
+      ]
+    },
+    reporters: ['progress', 'kjhtml'],
+    port: 9880,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['ChromeHeadless'],
+    browsers: ['Chrome'],
     singleRun: false,
-    concurrency: Infinity
-  })
-}
+    restartOnFileChange: true
+  });
+};
