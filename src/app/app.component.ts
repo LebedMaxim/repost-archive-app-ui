@@ -8,21 +8,16 @@ import {Component} from '@angular/core';
 export class AppComponent {
   title = 'repost-archive-app-ui';
 
-  darkTheme = false;
+  darkTheme = 'light';
   btnOutline = 'btn-outline-dark';
 
   changeTheme() {
-    function themeSwitcher(color: any) {
-      document.getElementById('themeSwitcher')!.setAttribute('data-bs-theme', color)
-    }
-
-    if (this.darkTheme) {
-      themeSwitcher('light')
-      this.btnOutline = 'btn-outline-dark';
+    if (this.darkTheme === 'dark') {
+      this.darkTheme = 'light'
+      this.btnOutline = 'btn-outline-dark'
     } else {
-      themeSwitcher('dark')
-      this.btnOutline = 'btn-outline-light';
+      this.darkTheme = 'dark'
+      this.btnOutline = 'btn-outline-light'
     }
-    this.darkTheme = !this.darkTheme
   }
 }
