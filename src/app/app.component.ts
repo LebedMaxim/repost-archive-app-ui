@@ -7,16 +7,15 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'repost-archive-app-ui';
-
-  darkTheme = 'light';
+  theme = 'light';
   btnOutline = 'btn-outline-dark';
 
   changeTheme() {
-    if (this.darkTheme === 'dark') {
-      this.darkTheme = 'light'
+    if (this.theme === 'dark') {
+      this.theme = 'light'
       this.btnOutline = 'btn-outline-dark'
     } else {
-      this.darkTheme = 'dark'
+      this.theme = 'dark'
       this.btnOutline = 'btn-outline-light'
     }
   }
