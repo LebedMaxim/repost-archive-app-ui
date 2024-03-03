@@ -19,4 +19,12 @@ export class AppComponent {
       this.btnOutline = 'btn-outline-light'
     }
   }
+
+  switchTheme() {
+    if (this.theme === 'dark') {
+      return 'Switch to light mode'
+    } else {
+      return 'Switch to dark mode'
+    }
+  }
 }
