@@ -23,41 +23,47 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('repost-archive-app-ui');
   });
 
-  it('should have light theme by default', () => {
+  it('should have a light theme by default', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
     const table = fixture.debugElement.nativeElement.querySelector('.table');
+
+    fixture.detectChanges();
     expect(table.getAttribute('data-bs-theme')).toBe('light');
   });
 
-  it('buttons should have dark theme by default', () => {
+  it('should have a dark theme at the buttons by default', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
     const buttonTheme = fixture.debugElement.query(By.css('.buttonTheme'));
+
+    fixture.detectChanges();
     expect(buttonTheme.classes['btn-outline-dark']).toBeTruthy();
   });
 
-  it('dark theme button should change theme to dark', () => {
+  it('should change a theme to dark by the switch theme button', () => {
     const fixture = TestBed.createComponent(AppComponent);
+    const table = fixture.debugElement.nativeElement.querySelector('.table');
+    const buttonTheme = fixture.debugElement.query(By.css('.buttonTheme'));
+
     fixture.detectChanges();
     fixture.debugElement.query(By.css('.btn.buttonTheme'))
       .triggerEventHandler("click", null);
     fixture.detectChanges();
-    const table = fixture.debugElement.nativeElement.querySelector('.table');
+
     expect(table.getAttribute('data-bs-theme')).toBe('dark');
-    const buttonTheme = fixture.debugElement.query(By.css('.buttonTheme'));
     expect(buttonTheme.classes['btn-outline-light']).toBeTruthy();
   });
 
-  it('dark theme button should change theme to light', () => {
+  it('should change a theme to light by the switch theme button', () => {
     const fixture = TestBed.createComponent(AppComponent);
+    const table = fixture.debugElement.nativeElement.querySelector('.table');
+    const buttonTheme = fixture.debugElement.query(By.css('.buttonTheme'));
+
     fixture.detectChanges();
     fixture.debugElement.query(By.css('.btn.buttonTheme'))
       .triggerEventHandler("dblclick", null);
     fixture.detectChanges();
-    const table = fixture.debugElement.nativeElement.querySelector('.table');
+
     expect(table.getAttribute('data-bs-theme')).toBe('light');
-    const buttonTheme = fixture.debugElement.query(By.css('.buttonTheme'));
     expect(buttonTheme.classes['btn-outline-dark']).toBeTruthy();
   });
 });
