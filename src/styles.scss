@@ -2,3 +2,7 @@
 body {
   overflow-y: hidden
 }
+
+.btn.buttonTheme:not(.btn-lg) {
+  width: 122px;
+}
