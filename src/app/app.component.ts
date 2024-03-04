@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,21 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'repost-archive-app-ui';
+  theme = 'light';
+
+  changeTheme() {
+    if (this.theme === 'dark') {
+      this.theme = 'light'
+    } else {
+      this.theme = 'dark'
+    }
+  }
+
+  switchTheme() {
+    if (this.theme === 'dark') {
+      return 'Switch to light mode'
+    } else {
+      return 'Switch to dark mode'
+    }
+  }
 }
