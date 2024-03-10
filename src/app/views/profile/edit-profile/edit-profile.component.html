@@ -1,3 +1,5 @@
 <p class="logout">Hi, {{user}}!
-  <button class="btn btn-secondary" (click)="logout()">Logout</button>
+  <button class="btn btn-lg loginButton"
+          [ngClass]="theme==='light' ? 'btn-outline-dark' : 'btn-outline-light'"
+          (click)="logout()">Logout</button>
 </p>

@@ -9,6 +9,7 @@ import {KeycloakService} from 'keycloak-angular';
 export class EditProfileComponent implements OnInit {
 
   user = '';
+  theme = 'light';
 
   constructor(private keycloakService: KeycloakService) {
   }
