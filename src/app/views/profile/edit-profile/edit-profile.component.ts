@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {KeycloakService} from 'keycloak-angular';
 
 @Component({
@@ -9,10 +9,11 @@ import {KeycloakService} from 'keycloak-angular';
 export class EditProfileComponent implements OnInit {
 
   user = '';
-  theme = 'light';
 
   constructor(private keycloakService: KeycloakService) {
   }
+
+  @Input() theme!: string;
 
   ngOnInit(): void {
     this.initializeUserOptions();
@@ -23,6 +24,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   logout(): void {
+    localStorage.setItem("locStTheme", `${this.theme}`);
     this.keycloakService.logout('http://localhost:4200').then();
   }
 }

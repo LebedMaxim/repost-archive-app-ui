@@ -3,8 +3,14 @@ import {Routes, RouterModule} from '@angular/router';
 import {EditProfileComponent} from './edit-profile/edit-profile.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'edit', pathMatch: 'full'},
-  {path: 'edit', component: EditProfileComponent}
+  {path: '', redirectTo: 'edit/:theme', pathMatch: 'full'},
+  {
+    path: 'edit',
+    children: [
+      {path: ':theme', component: EditProfileComponent}
+    ]
+  },
+  {path: '**', redirectTo: 'edit/:theme', pathMatch: 'full'},
 ];
 
 @NgModule({

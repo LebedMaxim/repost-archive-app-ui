@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -11,13 +11,14 @@ export class WelcomeComponent implements OnInit {
   constructor(private router: Router) {
   }
 
+  @Input() theme!: string;
+  locStTheme = localStorage.getItem("locStTheme")
+
   ngOnInit(): void {
   }
 
   login(): void {
-    this.router.navigateByUrl('/profile').then();
+    localStorage.setItem("locStTheme", `${this.theme}`);
+    this.router.navigateByUrl(`/profile/edit/${this.theme}`).then()
   }
-
-  theme = 'light';
-
 }
