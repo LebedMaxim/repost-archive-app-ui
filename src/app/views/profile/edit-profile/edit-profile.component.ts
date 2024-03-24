@@ -25,6 +25,6 @@ export class EditProfileComponent implements OnInit {
 
   logout(): void {
     localStorage.setItem("locStTheme", `${this.theme}`);
-    this.keycloakService.logout('http://localhost:4200').then();
+    this.keycloakService.logout('http://localhost:4202').then();
   }
 }

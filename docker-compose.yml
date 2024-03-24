@@ -1,0 +1,62 @@
+version: "3.8"
+volumes:
+  repost-archive:
+    driver: local
+  keycloak:
+    driver: local
+  db_data:
+
+services:
+  repost-archive-app-ui:
+    build: .
+    ports:
+      - "4202:4202"
+    image: repost-archive-app-ui
+    container_name: repost-archive-app-ui
+    volumes:
+      - "/src/app/node_modules"
+      - ".:/src/app"
+
+  repost-archive-keycloak-postgres:
+    image: postgres:latest
+    container_name: repost-archive-keycloak-postgres
+    volumes:
+      - db_data:/var/lib/repost-archive-keycloak-postgres/data
+    environment:
+      POSTGRES_DB: ${REPOST_ARCHIVE_KEYCLOAK_DB_NAME}
+      POSTGRES_USER: ${REPOST_ARCHIVE_KEYCLOAK_DB_USERNAME}
+      POSTGRES_PASSWORD: ${REPOST_ARCHIVE_KEYCLOAK_DB_PASSWORD}
+    ports:
+      - ${REPOST_ARCHIVE_KEYCLOAK_DB_PORT}
+    networks:
+      - repost-archive-network
+
+  repost-archive-keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: repost-archive-keycloak
+    environment:
+      KC_DB: ${REPOST_ARCHIVE_KEYCLOAK_DB}
+      KC_DB_URL: jdbc:postgresql://repost-archive-keycloak-postgres/${REPOST_ARCHIVE_KEYCLOAK_DB_NAME}
+      KC_DB_USERNAME: ${REPOST_ARCHIVE_KEYCLOAK_DB_USERNAME}
+      KC_DB_PASSWORD: ${REPOST_ARCHIVE_KEYCLOAK_DB_PASSWORD}
+      KEYCLOAK_ADMIN: ${REPOST_ARCHIVE_KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${REPOST_ARCHIVE_KEYCLOAK_ADMIN_PASSWORD}
+      KC_LOG_LEVEL: ${REPOST_ARCHIVE_KEYCLOAK_LOG_LEVEL}
+    command:
+      - start-dev
+      - --import-realm
+    volumes:
+      - type: bind
+        source: ./keycloak/realm.json
+        target: /opt/keycloak/data/import/realm.json
+        read_only: true
+    ports:
+      - "${REPOST_ARCHIVE_KEYCLOAK_PORT}:8080"
+    depends_on:
+      - repost-archive-keycloak-postgres
+    networks:
+      - repost-archive-network
+
+networks:
+  repost-archive-network:
+    driver: bridge

@@ -8,7 +8,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
       config: {
-        url: 'http://localhost:30000',
+        url: 'http://localhost:30001',
         realm: 'repost-archive',
         clientId: 'repost-archive-client'
       },
