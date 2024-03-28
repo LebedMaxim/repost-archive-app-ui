@@ -1,9 +1,12 @@
 # Project's primary goal:
-Create an application to send only new content for your friends and acquaintances: pictures, music, videos.
+Create an application that allows users to send only new content to their friends and acquaintances: pictures, music, and videos.
 ## Key features:
-- Ability to store and view your reposts' history, content and addressees.
-- Ability to set and correct a list of addressees and their reposts.
-- Ability to track and warn the same sent content immediately.
+- Ability to set up and maintain the addressee list.
+- Ability to set up and maintain the content type list.
+- Ability to send and store content to people and be warned immediately in case of a repeat.
+- Ability to track reposts and tag their content.
+- Ability to view reposts’ content in the application.
+- Ability to search and sort reposts by the content type, properties and tags.
 # Set up:
 Initial Set Up:
 - Run all services via `docker-compose.yml`
